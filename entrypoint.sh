@@ -8,6 +8,10 @@ SYSTEM_PACKAGES=$3
 PACKAGE_PATH=$4
 PIP_WHEEL_ARGS=$5
 
+# Install bazel
+wget https://copr.fedorainfracloud.org/coprs/vbatts/bazel/repo/epel-7/vbatts-bazel-epel-7.repo --directory-prefix=/etc/yum.repos.d
+yum install -y bazel3 || { echo "Installing bazel failed."; exit 1; }
+
 if [ ! -z "$SYSTEM_PACKAGES" ]; then
     yum install -y ${SYSTEM_PACKAGES}  || { echo "Installing yum package(s) failed."; exit 1; }
 fi
